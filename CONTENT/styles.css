@@ -1,0 +1,318 @@
+/* ═══════════════════════════════════════════════════════
+ *  WebAnnotator — Injected Styles
+ *  Dark-themed, glassmorphic toolbar & notes
+ * ═══════════════════════════════════════════════════════ */
+
+/* ── Reset: never inherit page styles ────────────────── */
+[data-wa-ui],
+[data-wa-ui] * {
+  box-sizing: border-box !important;
+  font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif !important;
+  line-height: 1.4 !important;
+}
+
+/* ── Utility: hide elements (beats any single-class !important) ── */
+.wa-hidden.wa-hidden {
+  display: none !important;
+}
+
+/* ═════════════  TOOLBAR  ═════════════════════════════ */
+
+.wa-toolbar {
+  position: fixed !important;
+  top: 14px;
+  right: 14px;
+  left: auto;
+  z-index: 2147483647 !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  pointer-events: auto !important;
+}
+
+/* ── full bar ────────────────────────────────────────── */
+.wa-toolbar-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  padding: 5px 6px !important;
+  background: rgba(22, 22, 30, 0.92) !important;
+  backdrop-filter: blur(18px) saturate(1.6) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 0 0.5px rgba(255, 255, 255, 0.06) inset !important;
+}
+
+/* ── drag handle ─────────────────────────────────────── */
+.wa-toolbar-drag {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 22px !important;
+  height: 28px !important;
+  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.30) !important;
+  cursor: grab !important;
+  letter-spacing: 1px !important;
+  flex-shrink: 0 !important;
+}
+.wa-toolbar-drag:active { cursor: grabbing !important; }
+
+/* ── separator ───────────────────────────────────────── */
+.wa-tb-sep {
+  width: 1px !important;
+  height: 20px !important;
+  margin: 0 3px !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── mode / action buttons ───────────────────────────── */
+.wa-tb-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 28px !important;
+  border: none !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.60) !important;
+  cursor: pointer !important;
+  transition: background 0.15s, color 0.15s, transform 0.12s !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+.wa-tb-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+}
+.wa-tb-btn.wa-active {
+  background: rgba(99, 135, 255, 0.28) !important;
+  color: #8eaaff !important;
+  box-shadow: 0 0 0 1px rgba(99, 135, 255, 0.25) inset !important;
+}
+.wa-tb-btn:active {
+  transform: scale(0.92) !important;
+}
+.wa-tb-btn svg {
+  flex-shrink: 0 !important;
+}
+
+/* ── clear button red tint ───────────────────────────── */
+.wa-tb-clear:hover {
+  background: rgba(255, 80, 80, 0.15) !important;
+  color: #ff7e7e !important;
+}
+
+/* ── color picker ────────────────────────────────────── */
+.wa-color-wrap {
+  position: relative !important;
+  width: 28px !important;
+  height: 28px !important;
+  flex-shrink: 0 !important;
+}
+.wa-color-preview {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(255, 255, 255, 0.18) !important;
+  margin: 3px !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s !important;
+}
+.wa-color-preview:hover {
+  border-color: rgba(255, 255, 255, 0.45) !important;
+}
+.wa-color-input {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ── collapsed pill ──────────────────────────────────── */
+.wa-toolbar-pill {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  background: rgba(22, 22, 30, 0.92) !important;
+  backdrop-filter: blur(18px) saturate(1.6) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.40) !important;
+  cursor: pointer !important;
+  color: rgba(255, 255, 255, 0.70) !important;
+  transition: transform 0.15s, box-shadow 0.15s !important;
+}
+/* pill starts hidden — toggled via .wa-hidden class */
+.wa-toolbar-pill:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.50) !important;
+  color: #fff !important;
+}
+
+/* ═════════════  HIGHLIGHTS  ═════════════════════════ */
+
+.wa-highlight {
+  /* background-color set inline with alpha transparency */
+  display: inline !important;
+  border-radius: 3px !important;
+  padding: 1px 0 !important;
+  cursor: default !important;
+  /* Inherit ALL text styles from the page so we never override them */
+  color: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+  text-decoration: inherit !important;
+  text-transform: inherit !important;
+  line-height: inherit !important;
+  vertical-align: inherit !important;
+  /* No blend modes — they bleed into surrounding elements */
+  mix-blend-mode: normal !important;
+  isolation: auto !important;
+  transition: opacity 0.15s !important;
+}
+.wa-highlight:hover {
+  opacity: 0.82 !important;
+}
+
+/* ═════════════  STICKY NOTES  ═══════════════════════ */
+
+.wa-note {
+  position: absolute !important;
+  width: 240px !important;
+  min-height: 120px !important;
+  background: rgba(28, 28, 36, 0.95) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: 3px solid #ffd54f !important; /* overridden inline */
+  border-radius: 10px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  pointer-events: auto !important;
+}
+
+.wa-note-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 4px 8px !important;
+  cursor: grab !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+.wa-note-header:active { cursor: grabbing !important; }
+
+.wa-note-drag {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.25) !important;
+  letter-spacing: 2px !important;
+}
+
+.wa-note-close {
+  border: none !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  width: 22px !important;
+  height: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 5px !important;
+  transition: background 0.15s, color 0.15s !important;
+  padding: 0 !important;
+}
+.wa-note-close:hover {
+  background: rgba(255, 80, 80, 0.18) !important;
+  color: #ff7e7e !important;
+}
+
+.wa-note-text {
+  flex: 1 !important;
+  width: 100% !important;
+  min-height: 80px !important;
+  padding: 8px 10px !important;
+  border: none !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 13px !important;
+  resize: vertical !important;
+  outline: none !important;
+}
+.wa-note-text::placeholder {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ═════════════  SHAPES  ════════════════════════════ */
+
+.wa-shapes-overlay {
+  background: transparent !important;
+  /* everything else positioned inline */
+}
+
+.wa-shape {
+  background: transparent !important;
+  /* border set inline */
+}
+
+/* ═════════════  CONTEXT MENU  ═══════════════════════ */
+
+.wa-context-menu {
+  position: absolute !important;
+  min-width: 180px !important;
+  background: rgba(22, 22, 30, 0.96) !important;
+  backdrop-filter: blur(16px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.50) !important;
+  padding: 4px !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  animation: wa-fade-in 0.12s ease !important;
+}
+
+.wa-ctx-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 8px 12px !important;
+  border: none !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.80) !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  transition: background 0.12s !important;
+  text-align: left !important;
+}
+.wa-ctx-btn:hover {
+  background: rgba(255, 80, 80, 0.15) !important;
+  color: #ff7e7e !important;
+}
+.wa-ctx-icon {
+  font-size: 14px !important;
+}
+
+/* ═════════════  UTILITY ANIMATIONS  ══════════════════ */
+
+@keyframes wa-fade-in {
+  from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
